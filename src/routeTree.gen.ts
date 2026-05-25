@@ -13,6 +13,8 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedConselhosIndexRouteImport } from './routes/_authenticated/conselhos.index'
+import { Route as AuthenticatedConselhosNovoRouteImport } from './routes/_authenticated/conselhos.novo'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -33,16 +35,32 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedConselhosIndexRoute =
+  AuthenticatedConselhosIndexRouteImport.update({
+    id: '/conselhos/',
+    path: '/conselhos/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedConselhosNovoRoute =
+  AuthenticatedConselhosNovoRouteImport.update({
+    id: '/conselhos/novo',
+    path: '/conselhos/novo',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/conselhos/novo': typeof AuthenticatedConselhosNovoRoute
+  '/conselhos/': typeof AuthenticatedConselhosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/conselhos/novo': typeof AuthenticatedConselhosNovoRoute
+  '/conselhos': typeof AuthenticatedConselhosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -50,18 +68,22 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/conselhos/novo': typeof AuthenticatedConselhosNovoRoute
+  '/_authenticated/conselhos/': typeof AuthenticatedConselhosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/dashboard'
+  fullPaths: '/' | '/login' | '/dashboard' | '/conselhos/novo' | '/conselhos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/dashboard'
+  to: '/' | '/login' | '/dashboard' | '/conselhos/novo' | '/conselhos'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/login'
     | '/_authenticated/dashboard'
+    | '/_authenticated/conselhos/novo'
+    | '/_authenticated/conselhos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -100,15 +122,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/conselhos/': {
+      id: '/_authenticated/conselhos/'
+      path: '/conselhos'
+      fullPath: '/conselhos/'
+      preLoaderRoute: typeof AuthenticatedConselhosIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/conselhos/novo': {
+      id: '/_authenticated/conselhos/novo'
+      path: '/conselhos/novo'
+      fullPath: '/conselhos/novo'
+      preLoaderRoute: typeof AuthenticatedConselhosNovoRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedConselhosNovoRoute: typeof AuthenticatedConselhosNovoRoute
+  AuthenticatedConselhosIndexRoute: typeof AuthenticatedConselhosIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedConselhosNovoRoute: AuthenticatedConselhosNovoRoute,
+  AuthenticatedConselhosIndexRoute: AuthenticatedConselhosIndexRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
