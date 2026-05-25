@@ -14,7 +14,9 @@ import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedConselhosIndexRouteImport } from './routes/_authenticated/conselhos.index'
+import { Route as AuthenticatedConferenciasIndexRouteImport } from './routes/_authenticated/conferencias.index'
 import { Route as AuthenticatedConselhosNovoRouteImport } from './routes/_authenticated/conselhos.novo'
+import { Route as AuthenticatedConferenciasNovaRouteImport } from './routes/_authenticated/conferencias.nova'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -41,10 +43,22 @@ const AuthenticatedConselhosIndexRoute =
     path: '/conselhos/',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedConferenciasIndexRoute =
+  AuthenticatedConferenciasIndexRouteImport.update({
+    id: '/conferencias/',
+    path: '/conferencias/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedConselhosNovoRoute =
   AuthenticatedConselhosNovoRouteImport.update({
     id: '/conselhos/novo',
     path: '/conselhos/novo',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedConferenciasNovaRoute =
+  AuthenticatedConferenciasNovaRouteImport.update({
+    id: '/conferencias/nova',
+    path: '/conferencias/nova',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
 
@@ -52,14 +66,18 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/conferencias/nova': typeof AuthenticatedConferenciasNovaRoute
   '/conselhos/novo': typeof AuthenticatedConselhosNovoRoute
+  '/conferencias/': typeof AuthenticatedConferenciasIndexRoute
   '/conselhos/': typeof AuthenticatedConselhosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/conferencias/nova': typeof AuthenticatedConferenciasNovaRoute
   '/conselhos/novo': typeof AuthenticatedConselhosNovoRoute
+  '/conferencias': typeof AuthenticatedConferenciasIndexRoute
   '/conselhos': typeof AuthenticatedConselhosIndexRoute
 }
 export interface FileRoutesById {
@@ -68,21 +86,39 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/conferencias/nova': typeof AuthenticatedConferenciasNovaRoute
   '/_authenticated/conselhos/novo': typeof AuthenticatedConselhosNovoRoute
+  '/_authenticated/conferencias/': typeof AuthenticatedConferenciasIndexRoute
   '/_authenticated/conselhos/': typeof AuthenticatedConselhosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/dashboard' | '/conselhos/novo' | '/conselhos/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/dashboard'
+    | '/conferencias/nova'
+    | '/conselhos/novo'
+    | '/conferencias/'
+    | '/conselhos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/dashboard' | '/conselhos/novo' | '/conselhos'
+  to:
+    | '/'
+    | '/login'
+    | '/dashboard'
+    | '/conferencias/nova'
+    | '/conselhos/novo'
+    | '/conferencias'
+    | '/conselhos'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/login'
     | '/_authenticated/dashboard'
+    | '/_authenticated/conferencias/nova'
     | '/_authenticated/conselhos/novo'
+    | '/_authenticated/conferencias/'
     | '/_authenticated/conselhos/'
   fileRoutesById: FileRoutesById
 }
@@ -129,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedConselhosIndexRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/conferencias/': {
+      id: '/_authenticated/conferencias/'
+      path: '/conferencias'
+      fullPath: '/conferencias/'
+      preLoaderRoute: typeof AuthenticatedConferenciasIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/conselhos/novo': {
       id: '/_authenticated/conselhos/novo'
       path: '/conselhos/novo'
@@ -136,18 +179,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedConselhosNovoRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/conferencias/nova': {
+      id: '/_authenticated/conferencias/nova'
+      path: '/conferencias/nova'
+      fullPath: '/conferencias/nova'
+      preLoaderRoute: typeof AuthenticatedConferenciasNovaRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedConferenciasNovaRoute: typeof AuthenticatedConferenciasNovaRoute
   AuthenticatedConselhosNovoRoute: typeof AuthenticatedConselhosNovoRoute
+  AuthenticatedConferenciasIndexRoute: typeof AuthenticatedConferenciasIndexRoute
   AuthenticatedConselhosIndexRoute: typeof AuthenticatedConselhosIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedConferenciasNovaRoute: AuthenticatedConferenciasNovaRoute,
   AuthenticatedConselhosNovoRoute: AuthenticatedConselhosNovoRoute,
+  AuthenticatedConferenciasIndexRoute: AuthenticatedConferenciasIndexRoute,
   AuthenticatedConselhosIndexRoute: AuthenticatedConselhosIndexRoute,
 }
 
