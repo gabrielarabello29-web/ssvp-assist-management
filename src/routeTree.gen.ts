@@ -9,38 +9,193 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedConselhosIndexRouteImport } from './routes/_authenticated/conselhos.index'
+import { Route as AuthenticatedConferenciasIndexRouteImport } from './routes/_authenticated/conferencias.index'
+import { Route as AuthenticatedAssistidosIndexRouteImport } from './routes/_authenticated/assistidos.index'
+import { Route as AuthenticatedConselhosNovoRouteImport } from './routes/_authenticated/conselhos.novo'
+import { Route as AuthenticatedConferenciasNovaRouteImport } from './routes/_authenticated/conferencias.nova'
+import { Route as AuthenticatedAssistidosNovoRouteImport } from './routes/_authenticated/assistidos.novo'
+import { Route as AuthenticatedAssistidosIdRouteImport } from './routes/_authenticated/assistidos.$id'
+import { Route as AuthenticatedAssistidosEditarIdRouteImport } from './routes/_authenticated/assistidos.editar.$id'
 
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedConselhosIndexRoute =
+  AuthenticatedConselhosIndexRouteImport.update({
+    id: '/conselhos/',
+    path: '/conselhos/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedConferenciasIndexRoute =
+  AuthenticatedConferenciasIndexRouteImport.update({
+    id: '/conferencias/',
+    path: '/conferencias/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedAssistidosIndexRoute =
+  AuthenticatedAssistidosIndexRouteImport.update({
+    id: '/assistidos/',
+    path: '/assistidos/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedConselhosNovoRoute =
+  AuthenticatedConselhosNovoRouteImport.update({
+    id: '/conselhos/novo',
+    path: '/conselhos/novo',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedConferenciasNovaRoute =
+  AuthenticatedConferenciasNovaRouteImport.update({
+    id: '/conferencias/nova',
+    path: '/conferencias/nova',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedAssistidosNovoRoute =
+  AuthenticatedAssistidosNovoRouteImport.update({
+    id: '/assistidos/novo',
+    path: '/assistidos/novo',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedAssistidosIdRoute =
+  AuthenticatedAssistidosIdRouteImport.update({
+    id: '/assistidos/$id',
+    path: '/assistidos/$id',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedAssistidosEditarIdRoute =
+  AuthenticatedAssistidosEditarIdRouteImport.update({
+    id: '/assistidos/editar/$id',
+    path: '/assistidos/editar/$id',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/assistidos/$id': typeof AuthenticatedAssistidosIdRoute
+  '/assistidos/novo': typeof AuthenticatedAssistidosNovoRoute
+  '/conferencias/nova': typeof AuthenticatedConferenciasNovaRoute
+  '/conselhos/novo': typeof AuthenticatedConselhosNovoRoute
+  '/assistidos/': typeof AuthenticatedAssistidosIndexRoute
+  '/conferencias/': typeof AuthenticatedConferenciasIndexRoute
+  '/conselhos/': typeof AuthenticatedConselhosIndexRoute
+  '/assistidos/editar/$id': typeof AuthenticatedAssistidosEditarIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/assistidos/$id': typeof AuthenticatedAssistidosIdRoute
+  '/assistidos/novo': typeof AuthenticatedAssistidosNovoRoute
+  '/conferencias/nova': typeof AuthenticatedConferenciasNovaRoute
+  '/conselhos/novo': typeof AuthenticatedConselhosNovoRoute
+  '/assistidos': typeof AuthenticatedAssistidosIndexRoute
+  '/conferencias': typeof AuthenticatedConferenciasIndexRoute
+  '/conselhos': typeof AuthenticatedConselhosIndexRoute
+  '/assistidos/editar/$id': typeof AuthenticatedAssistidosEditarIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/login': typeof LoginRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/assistidos/$id': typeof AuthenticatedAssistidosIdRoute
+  '/_authenticated/assistidos/novo': typeof AuthenticatedAssistidosNovoRoute
+  '/_authenticated/conferencias/nova': typeof AuthenticatedConferenciasNovaRoute
+  '/_authenticated/conselhos/novo': typeof AuthenticatedConselhosNovoRoute
+  '/_authenticated/assistidos/': typeof AuthenticatedAssistidosIndexRoute
+  '/_authenticated/conferencias/': typeof AuthenticatedConferenciasIndexRoute
+  '/_authenticated/conselhos/': typeof AuthenticatedConselhosIndexRoute
+  '/_authenticated/assistidos/editar/$id': typeof AuthenticatedAssistidosEditarIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/dashboard'
+    | '/assistidos/$id'
+    | '/assistidos/novo'
+    | '/conferencias/nova'
+    | '/conselhos/novo'
+    | '/assistidos/'
+    | '/conferencias/'
+    | '/conselhos/'
+    | '/assistidos/editar/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/login'
+    | '/dashboard'
+    | '/assistidos/$id'
+    | '/assistidos/novo'
+    | '/conferencias/nova'
+    | '/conselhos/novo'
+    | '/assistidos'
+    | '/conferencias'
+    | '/conselhos'
+    | '/assistidos/editar/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/login'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/assistidos/$id'
+    | '/_authenticated/assistidos/novo'
+    | '/_authenticated/conferencias/nova'
+    | '/_authenticated/conselhos/novo'
+    | '/_authenticated/assistidos/'
+    | '/_authenticated/conferencias/'
+    | '/_authenticated/conselhos/'
+    | '/_authenticated/assistidos/editar/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  LoginRoute: typeof LoginRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +203,105 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/conselhos/': {
+      id: '/_authenticated/conselhos/'
+      path: '/conselhos'
+      fullPath: '/conselhos/'
+      preLoaderRoute: typeof AuthenticatedConselhosIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/conferencias/': {
+      id: '/_authenticated/conferencias/'
+      path: '/conferencias'
+      fullPath: '/conferencias/'
+      preLoaderRoute: typeof AuthenticatedConferenciasIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/assistidos/': {
+      id: '/_authenticated/assistidos/'
+      path: '/assistidos'
+      fullPath: '/assistidos/'
+      preLoaderRoute: typeof AuthenticatedAssistidosIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/conselhos/novo': {
+      id: '/_authenticated/conselhos/novo'
+      path: '/conselhos/novo'
+      fullPath: '/conselhos/novo'
+      preLoaderRoute: typeof AuthenticatedConselhosNovoRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/conferencias/nova': {
+      id: '/_authenticated/conferencias/nova'
+      path: '/conferencias/nova'
+      fullPath: '/conferencias/nova'
+      preLoaderRoute: typeof AuthenticatedConferenciasNovaRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/assistidos/novo': {
+      id: '/_authenticated/assistidos/novo'
+      path: '/assistidos/novo'
+      fullPath: '/assistidos/novo'
+      preLoaderRoute: typeof AuthenticatedAssistidosNovoRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/assistidos/$id': {
+      id: '/_authenticated/assistidos/$id'
+      path: '/assistidos/$id'
+      fullPath: '/assistidos/$id'
+      preLoaderRoute: typeof AuthenticatedAssistidosIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/assistidos/editar/$id': {
+      id: '/_authenticated/assistidos/editar/$id'
+      path: '/assistidos/editar/$id'
+      fullPath: '/assistidos/editar/$id'
+      preLoaderRoute: typeof AuthenticatedAssistidosEditarIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
+interface AuthenticatedRouteChildren {
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedAssistidosIdRoute: typeof AuthenticatedAssistidosIdRoute
+  AuthenticatedAssistidosNovoRoute: typeof AuthenticatedAssistidosNovoRoute
+  AuthenticatedConferenciasNovaRoute: typeof AuthenticatedConferenciasNovaRoute
+  AuthenticatedConselhosNovoRoute: typeof AuthenticatedConselhosNovoRoute
+  AuthenticatedAssistidosIndexRoute: typeof AuthenticatedAssistidosIndexRoute
+  AuthenticatedConferenciasIndexRoute: typeof AuthenticatedConferenciasIndexRoute
+  AuthenticatedConselhosIndexRoute: typeof AuthenticatedConselhosIndexRoute
+  AuthenticatedAssistidosEditarIdRoute: typeof AuthenticatedAssistidosEditarIdRoute
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedAssistidosIdRoute: AuthenticatedAssistidosIdRoute,
+  AuthenticatedAssistidosNovoRoute: AuthenticatedAssistidosNovoRoute,
+  AuthenticatedConferenciasNovaRoute: AuthenticatedConferenciasNovaRoute,
+  AuthenticatedConselhosNovoRoute: AuthenticatedConselhosNovoRoute,
+  AuthenticatedAssistidosIndexRoute: AuthenticatedAssistidosIndexRoute,
+  AuthenticatedConferenciasIndexRoute: AuthenticatedConferenciasIndexRoute,
+  AuthenticatedConselhosIndexRoute: AuthenticatedConselhosIndexRoute,
+  AuthenticatedAssistidosEditarIdRoute: AuthenticatedAssistidosEditarIdRoute,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
+  LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
