@@ -83,7 +83,7 @@ export function AssistidoForm({ initial, onSubmit, submitting, submitLabel = "Sa
   ];
 
   const next = async () => {
-    const fields = stepFields[step];
+    const fields = stepFields[step] ?? [];
     const ok = fields.length ? await trigger(fields as never) : true;
     if (ok) setStep((s) => Math.min(s + 1, steps.length - 1));
   };
