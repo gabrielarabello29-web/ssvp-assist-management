@@ -18,11 +18,11 @@ export const assistidoService = {
     return data;
   },
   criar: async (payload: AssistidoPayload): Promise<Assistido> => {
-    const { data } = await api.post<Assistido>("/assistidos/criar", payload);
+    const { data } = await api.post<Assistido>("/assistidos/criar", { ...payload, ativo: true });
     return data;
   },
   atualizar: async (id: string, payload: AssistidoPayload): Promise<Assistido> => {
-    const { data } = await api.put<Assistido>(`/assistidos/atualizar/${id}`, payload);
+    const { data } = await api.put<Assistido>(`/assistidos/atualizar/${id}`, { ...payload, ativo: true });
     return data;
   },
   deletar: async (id: string): Promise<void> => {
