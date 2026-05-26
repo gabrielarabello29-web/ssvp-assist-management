@@ -10,9 +10,20 @@ export interface LoginResponse {
   type?: string;
 }
 
+export interface RegisterRequest {
+  nome: string;
+  email: string;
+  senha: string;
+  perfil?: string;
+}
+
 export const authService = {
   login: async (payload: LoginRequest): Promise<LoginResponse> => {
     const { data } = await api.post<LoginResponse>("/auth/login", payload);
+    return data;
+  },
+  register: async (payload: RegisterRequest): Promise<unknown> => {
+    const { data } = await api.post("/auth/register", payload);
     return data;
   },
 };

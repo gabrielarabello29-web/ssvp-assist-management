@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Heart, LogIn } from "lucide-react";
@@ -109,6 +109,12 @@ function LoginPage() {
           </form>
           <p className="mt-6 text-center text-xs text-muted-foreground">
             Backend esperado em <code className="rounded bg-muted px-1.5 py-0.5">http://localhost:8080</code>
+          </p>
+          <p className="mt-3 text-center text-sm text-muted-foreground">
+            Não tem conta?{" "}
+            <Link to="/register" className="font-medium text-primary hover:underline">
+              Cadastre-se
+            </Link>
           </p>
         </div>
       </div>

@@ -34,7 +34,7 @@ function NovaConferenciaPage() {
   });
 
   const { register, handleSubmit, control, formState: { errors } } = useForm<ConferenciaPayload>({
-    defaultValues: { nome: "", conselhoId: "" },
+    defaultValues: { nome: "", conselhoParticularId: "" },
   });
 
   const mutation = useMutation({
@@ -73,7 +73,7 @@ function NovaConferenciaPage() {
               <Label>Conselho *</Label>
               <Controller
                 control={control}
-                name="conselhoId"
+                name="conselhoParticularId"
                 rules={{ required: "Selecione o conselho" }}
                 render={({ field }) => (
                   <Select value={field.value} onValueChange={field.onChange}>
@@ -86,7 +86,9 @@ function NovaConferenciaPage() {
                   </Select>
                 )}
               />
-              {errors.conselhoId && <p className="text-xs text-destructive">{errors.conselhoId.message}</p>}
+              {errors.conselhoParticularId && (
+                <p className="text-xs text-destructive">{errors.conselhoParticularId.message}</p>
+              )}
             </div>
             <div className="flex justify-end gap-2 pt-2">
               <Button type="button" variant="outline" onClick={() => navigate({ to: "/conferencias" })}>
