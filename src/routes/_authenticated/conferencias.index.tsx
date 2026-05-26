@@ -1,7 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { Plus, Ban } from "lucide-react";
+import { Plus, Ban, Pencil } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,6 +28,7 @@ export const Route = createFileRoute("/_authenticated/conferencias/")({
 function ConferenciasPage() {
   const { isGestor } = useAuth();
   const qc = useQueryClient();
+  const navigate = useNavigate();
   const [filtroConselho, setFiltroConselho] = useState<string>("all");
   const [toDelete, setToDelete] = useState<Conferencia | null>(null);
 
@@ -63,19 +64,32 @@ function ConferenciasPage() {
     {
       key: "acoes",
       header: "Ações",
-      className: "w-24 text-right",
-      render: (r) =>
-        isGestor && r.ativo ? (
-          <Button
-            size="icon"
-            variant="ghost"
-            onClick={() => setToDelete(r)}
-            className="text-destructive hover:text-destructive"
-            title="Desativar"
-          >
-            <Ban className="h-4 w-4" />
-          </Button>
-        ) : null,
+      className: "w-32 text-right",
+      render: (r) => (
+        <div className="flex justify-end gap-1">
+          {isGestor && (
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={() => navigate({ to: "/conferencias/editar/$id", params: { id: r.id } })}
+              title="Editar"
+            >
+              <Pencil className="h-4 w-4" />
+            </Button>
+          )}
+          {isGestor && r.ativo && (
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={() => setToDelete(r)}
+              className="text-destructive hover:text-destructive"
+              title="Desativar"
+            >
+              <Ban className="h-4 w-4" />
+            </Button>
+          )}
+        </div>
+      ),
     },
   ];
 
