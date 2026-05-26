@@ -18,7 +18,15 @@ export const assistidoService = {
     return data;
   },
   criar: async (payload: AssistidoPayload): Promise<Assistido> => {
-    const { data } = await api.post<Assistido>("/assistidos/criar", { ...payload, ativo: true });
+    const { data } = await api.post<Assistido>("/assistidos/criar", { ...payload, ativo: true, status: "ATIVO" });
+    if (data?.id && data.ativo === false) {
+      try {
+        const updated = await api.put<Assistido>(`/assistidos/atualizar/${data.id}`, { ...payload, ativo: true });
+        return updated.data;
+      } catch {
+        return data;
+      }
+    }
     return data;
   },
   atualizar: async (id: string, payload: AssistidoPayload): Promise<Assistido> => {
