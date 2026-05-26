@@ -13,7 +13,7 @@ export const conselhoService = {
     return data;
   },
   criar: async (payload: ConselhoPayload): Promise<Conselho> => {
-    const { data } = await api.post<Conselho>("/conselhos/criar", payload);
+    const { data } = await api.post<Conselho>("/conselhos/criar", { ...payload, ativo: true });
     return data;
   },
   deletar: async (id: string): Promise<void> => {

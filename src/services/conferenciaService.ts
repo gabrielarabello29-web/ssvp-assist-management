@@ -14,7 +14,7 @@ export const conferenciaService = {
     return data;
   },
   criar: async (payload: ConferenciaPayload): Promise<Conferencia> => {
-    const { data } = await api.post<Conferencia>("/conferencias/criar", payload);
+    const { data } = await api.post<Conferencia>("/conferencias/criar", { ...payload, ativo: true });
     return data;
   },
   deletar: async (id: string): Promise<void> => {
