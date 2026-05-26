@@ -3,7 +3,7 @@ import type { Conferencia } from "@/types";
 
 export interface ConferenciaPayload {
   nome: string;
-  conselhoId: string;
+  conselhoParticularId: string;
 }
 
 export const conferenciaService = {
