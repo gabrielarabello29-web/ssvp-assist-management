@@ -21,6 +21,8 @@ import { Route as AuthenticatedConselhosNovoRouteImport } from './routes/_authen
 import { Route as AuthenticatedConferenciasNovaRouteImport } from './routes/_authenticated/conferencias.nova'
 import { Route as AuthenticatedAssistidosNovoRouteImport } from './routes/_authenticated/assistidos.novo'
 import { Route as AuthenticatedAssistidosIdRouteImport } from './routes/_authenticated/assistidos.$id'
+import { Route as AuthenticatedConselhosEditarIdRouteImport } from './routes/_authenticated/conselhos.editar.$id'
+import { Route as AuthenticatedConferenciasEditarIdRouteImport } from './routes/_authenticated/conferencias.editar.$id'
 import { Route as AuthenticatedAssistidosEditarIdRouteImport } from './routes/_authenticated/assistidos.editar.$id'
 
 const RegisterRoute = RegisterRouteImport.update({
@@ -89,6 +91,18 @@ const AuthenticatedAssistidosIdRoute =
     path: '/assistidos/$id',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedConselhosEditarIdRoute =
+  AuthenticatedConselhosEditarIdRouteImport.update({
+    id: '/conselhos/editar/$id',
+    path: '/conselhos/editar/$id',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedConferenciasEditarIdRoute =
+  AuthenticatedConferenciasEditarIdRouteImport.update({
+    id: '/conferencias/editar/$id',
+    path: '/conferencias/editar/$id',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedAssistidosEditarIdRoute =
   AuthenticatedAssistidosEditarIdRouteImport.update({
     id: '/assistidos/editar/$id',
@@ -109,6 +123,8 @@ export interface FileRoutesByFullPath {
   '/conferencias/': typeof AuthenticatedConferenciasIndexRoute
   '/conselhos/': typeof AuthenticatedConselhosIndexRoute
   '/assistidos/editar/$id': typeof AuthenticatedAssistidosEditarIdRoute
+  '/conferencias/editar/$id': typeof AuthenticatedConferenciasEditarIdRoute
+  '/conselhos/editar/$id': typeof AuthenticatedConselhosEditarIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -123,6 +139,8 @@ export interface FileRoutesByTo {
   '/conferencias': typeof AuthenticatedConferenciasIndexRoute
   '/conselhos': typeof AuthenticatedConselhosIndexRoute
   '/assistidos/editar/$id': typeof AuthenticatedAssistidosEditarIdRoute
+  '/conferencias/editar/$id': typeof AuthenticatedConferenciasEditarIdRoute
+  '/conselhos/editar/$id': typeof AuthenticatedConselhosEditarIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -139,6 +157,8 @@ export interface FileRoutesById {
   '/_authenticated/conferencias/': typeof AuthenticatedConferenciasIndexRoute
   '/_authenticated/conselhos/': typeof AuthenticatedConselhosIndexRoute
   '/_authenticated/assistidos/editar/$id': typeof AuthenticatedAssistidosEditarIdRoute
+  '/_authenticated/conferencias/editar/$id': typeof AuthenticatedConferenciasEditarIdRoute
+  '/_authenticated/conselhos/editar/$id': typeof AuthenticatedConselhosEditarIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -155,6 +175,8 @@ export interface FileRouteTypes {
     | '/conferencias/'
     | '/conselhos/'
     | '/assistidos/editar/$id'
+    | '/conferencias/editar/$id'
+    | '/conselhos/editar/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -169,6 +191,8 @@ export interface FileRouteTypes {
     | '/conferencias'
     | '/conselhos'
     | '/assistidos/editar/$id'
+    | '/conferencias/editar/$id'
+    | '/conselhos/editar/$id'
   id:
     | '__root__'
     | '/'
@@ -184,6 +208,8 @@ export interface FileRouteTypes {
     | '/_authenticated/conferencias/'
     | '/_authenticated/conselhos/'
     | '/_authenticated/assistidos/editar/$id'
+    | '/_authenticated/conferencias/editar/$id'
+    | '/_authenticated/conselhos/editar/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -279,6 +305,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAssistidosIdRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/conselhos/editar/$id': {
+      id: '/_authenticated/conselhos/editar/$id'
+      path: '/conselhos/editar/$id'
+      fullPath: '/conselhos/editar/$id'
+      preLoaderRoute: typeof AuthenticatedConselhosEditarIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/conferencias/editar/$id': {
+      id: '/_authenticated/conferencias/editar/$id'
+      path: '/conferencias/editar/$id'
+      fullPath: '/conferencias/editar/$id'
+      preLoaderRoute: typeof AuthenticatedConferenciasEditarIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/assistidos/editar/$id': {
       id: '/_authenticated/assistidos/editar/$id'
       path: '/assistidos/editar/$id'
@@ -299,6 +339,8 @@ interface AuthenticatedRouteChildren {
   AuthenticatedConferenciasIndexRoute: typeof AuthenticatedConferenciasIndexRoute
   AuthenticatedConselhosIndexRoute: typeof AuthenticatedConselhosIndexRoute
   AuthenticatedAssistidosEditarIdRoute: typeof AuthenticatedAssistidosEditarIdRoute
+  AuthenticatedConferenciasEditarIdRoute: typeof AuthenticatedConferenciasEditarIdRoute
+  AuthenticatedConselhosEditarIdRoute: typeof AuthenticatedConselhosEditarIdRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
@@ -311,6 +353,9 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedConferenciasIndexRoute: AuthenticatedConferenciasIndexRoute,
   AuthenticatedConselhosIndexRoute: AuthenticatedConselhosIndexRoute,
   AuthenticatedAssistidosEditarIdRoute: AuthenticatedAssistidosEditarIdRoute,
+  AuthenticatedConferenciasEditarIdRoute:
+    AuthenticatedConferenciasEditarIdRoute,
+  AuthenticatedConselhosEditarIdRoute: AuthenticatedConselhosEditarIdRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
@@ -326,3 +371,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
