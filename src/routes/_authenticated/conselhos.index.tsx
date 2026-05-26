@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Plus, Eye, Ban } from "lucide-react";
+import { Plus, Eye, Ban, Pencil } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -57,6 +57,16 @@ function ConselhosPage() {
           <Button size="icon" variant="ghost" onClick={() => navigate({ to: "/conferencias" })} title="Ver conferências">
             <Eye className="h-4 w-4" />
           </Button>
+          {isGestor && (
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={() => navigate({ to: "/conselhos/editar/$id", params: { id: r.id } })}
+              title="Editar"
+            >
+              <Pencil className="h-4 w-4" />
+            </Button>
+          )}
           {isGestor && r.ativo && (
             <Button
               size="icon"
