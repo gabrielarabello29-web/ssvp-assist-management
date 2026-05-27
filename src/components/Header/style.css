@@ -1,0 +1,19 @@
+.app-header {
+  position: sticky; top: 0; z-index: 20;
+  height: 4rem;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1rem;
+  background: hsl(var(--background) / .95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid hsl(var(--border));
+}
+@media (min-width: 1024px) { .app-header { padding: 0 2rem; } }
+.app-header-user { display: flex; align-items: center; gap: .75rem; }
+.app-header-avatar {
+  width: 2.25rem; height: 2.25rem;
+  border-radius: 9999px;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  display: flex; align-items: center; justify-content: center;
+  font-size: .8rem; font-weight: 600;
+}

@@ -1,0 +1,12 @@
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; gap: 1rem; flex-wrap: wrap; }
+.page-title { font-size: 1.4rem; font-weight: 600; color: hsl(var(--foreground)); }
+.page-subtitle { color: hsl(var(--muted-foreground)); font-size: .85rem; }
+.search-bar { margin-bottom: 1rem; max-width: 24rem; }
+.row-actions { display: flex; gap: .5rem; justify-content: flex-end; }
+.badge {
+  display: inline-flex; align-items: center;
+  padding: .15rem .55rem; border-radius: 9999px;
+  font-size: .7rem; font-weight: 600;
+}
+.badge-success { background: hsl(142 71% 95%); color: hsl(142 71% 25%); }
+.badge-muted { background: hsl(var(--muted)); color: hsl(var(--muted-foreground)); }
