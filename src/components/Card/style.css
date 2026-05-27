@@ -1,0 +1,19 @@
+.stat-card {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: .75rem;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.stat-card-label { font-size: .8rem; color: hsl(var(--muted-foreground)); }
+.stat-card-value { font-size: 1.75rem; font-weight: 600; color: hsl(var(--foreground)); margin-top: .25rem; }
+.stat-card-icon {
+  width: 2.75rem; height: 2.75rem;
+  border-radius: .75rem;
+  background: hsl(var(--primary) / .12);
+  color: hsl(var(--primary));
+  display: flex; align-items: center; justify-content: center;
+}
