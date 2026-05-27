@@ -1,0 +1,17 @@
+.form-card {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: .75rem;
+  padding: 1.5rem;
+}
+.form-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .form-grid { grid-template-columns: repeat(2, 1fr); } }
+.form-section { margin-bottom: 1.5rem; }
+.form-section-title {
+  font-size: 1rem; font-weight: 600; color: hsl(var(--foreground));
+  margin-bottom: .75rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid hsl(var(--border));
+}
+.col-span-2 { grid-column: span 2 / span 2; }
+@media (max-width: 640px) { .col-span-2 { grid-column: span 1 / span 1; } }
