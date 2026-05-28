@@ -91,7 +91,7 @@ export default function Login() {
           {/* Abas */}
           <div className="login-tabs mb-8">
             <button
-              onClick={() => !isRegister && handleToggle()}
+              onClick={() => isRegister && handleToggle()}
               className={`tab-button ${!isRegister ? "active" : ""}`}
               disabled={loading}
             >
@@ -99,7 +99,7 @@ export default function Login() {
               Entrar
             </button>
             <button
-              onClick={() => isRegister && handleToggle()}
+              onClick={() => !isRegister && handleToggle()}
               className={`tab-button ${isRegister ? "active" : ""}`}
               disabled={loading}
             >
