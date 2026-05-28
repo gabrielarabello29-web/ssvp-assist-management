@@ -59,9 +59,14 @@ export default function Login() {
     }
   };
 
-  const handleToggle = () => {
+  const handleToggleRegister = () => {
     reset();
-    setIsRegister(!isRegister);
+    setIsRegister(true);
+  };
+
+  const handleToggleLogin = () => {
+    reset();
+    setIsRegister(false);
   };
 
   return (
@@ -91,7 +96,7 @@ export default function Login() {
           {/* Abas */}
           <div className="login-tabs mb-8">
             <button
-              onClick={() => isRegister && handleToggle()}
+              onClick={handleToggleLogin}
               className={`tab-button ${!isRegister ? "active" : ""}`}
               disabled={loading}
             >
@@ -99,7 +104,7 @@ export default function Login() {
               Entrar
             </button>
             <button
-              onClick={() => !isRegister && handleToggle()}
+              onClick={handleToggleRegister}
               className={`tab-button ${isRegister ? "active" : ""}`}
               disabled={loading}
             >
