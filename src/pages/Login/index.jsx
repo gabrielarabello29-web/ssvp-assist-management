@@ -17,7 +17,13 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
   
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+  const loginForm = useForm({
+    mode: "onChange",
+    defaultValues: { email: "", senha: "" },
+  });
+
+  const registerForm = useForm({
+    mode: "onChange",
     defaultValues: { email: "", senha: "", nome: "", perfil: "VOLUNTARIO" },
   });
 
@@ -50,7 +56,7 @@ export default function Login() {
         perfil: values.perfil,
       });
       toast.success("Conta criada com sucesso! Faça login para continuar.");
-      reset();
+      registerForm.reset();
       setIsRegister(false);
     } catch (err) {
       toast.error(extractErrorMessage(err));
@@ -60,12 +66,12 @@ export default function Login() {
   };
 
   const handleToggleRegister = () => {
-    reset();
+    loginForm.reset();
     setIsRegister(true);
   };
 
   const handleToggleLogin = () => {
-    reset();
+    registerForm.reset();
     setIsRegister(false);
   };
 
@@ -122,16 +128,16 @@ export default function Login() {
                 <h1 className="text-2xl font-semibold text-foreground">Entrar</h1>
                 <p className="mt-1 text-sm text-muted-foreground">Acesse o painel com suas credenciais.</p>
               </div>
-              <form onSubmit={handleSubmit(onSubmitLogin)} className="space-y-4">
+              <form onSubmit={loginForm.handleSubmit(onSubmitLogin)} className="space-y-4">
                 <div className="space-y-1.5">
                   <Label htmlFor="email-login">E-mail</Label>
                   <Input 
                     id="email-login" 
                     type="email" 
                     placeholder="voce@ssvp.org.br"
-                    {...register("email", { required: "Informe o e-mail" })} 
+                    {...loginForm.register("email", { required: "Informe o e-mail" })} 
                   />
-                  {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
+                  {loginForm.formState.errors.email && <p className="text-xs text-destructive">{loginForm.formState.errors.email.message}</p>}
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="senha-login">Senha</Label>
@@ -139,9 +145,9 @@ export default function Login() {
                     id="senha-login" 
                     type="password" 
                     placeholder="••••••••"
-                    {...register("senha", { required: "Informe a senha" })} 
+                    {...loginForm.register("senha", { required: "Informe a senha" })} 
                   />
-                  {errors.senha && <p className="text-xs text-destructive">{errors.senha.message}</p>}
+                  {loginForm.formState.errors.senha && <p className="text-xs text-destructive">{loginForm.formState.errors.senha.message}</p>}
                 </div>
                 <Button type="submit" className="w-full" disabled={loading}>
                   <LogIn className="mr-2 h-4 w-4" />
@@ -155,16 +161,16 @@ export default function Login() {
                 <h1 className="text-2xl font-semibold text-foreground">Criar conta</h1>
                 <p className="mt-1 text-sm text-muted-foreground">Cadastre-se para acessar o painel.</p>
               </div>
-              <form onSubmit={handleSubmit(onSubmitRegister)} className="space-y-4">
+              <form onSubmit={registerForm.handleSubmit(onSubmitRegister)} className="space-y-4">
                 <div className="space-y-1.5">
                   <Label htmlFor="nome">Nome completo</Label>
                   <Input 
                     id="nome" 
                     type="text" 
                     placeholder="Seu nome completo"
-                    {...register("nome", { required: "Informe seu nome" })} 
+                    {...registerForm.register("nome", { required: "Informe seu nome" })} 
                   />
-                  {errors.nome && <p className="text-xs text-destructive">{errors.nome.message}</p>}
+                  {registerForm.formState.errors.nome && <p className="text-xs text-destructive">{registerForm.formState.errors.nome.message}</p>}
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="email-register">E-mail</Label>
@@ -172,9 +178,9 @@ export default function Login() {
                     id="email-register" 
                     type="email" 
                     placeholder="voce@ssvp.org.br"
-                    {...register("email", { required: "Informe o e-mail" })} 
+                    {...registerForm.register("email", { required: "Informe o e-mail" })} 
                   />
-                  {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
+                  {registerForm.formState.errors.email && <p className="text-xs text-destructive">{registerForm.formState.errors.email.message}</p>}
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="senha-register">Senha</Label>
@@ -182,21 +188,21 @@ export default function Login() {
                     id="senha-register" 
                     type="password" 
                     placeholder="••••••••"
-                    {...register("senha", { required: "Informe a senha" })} 
+                    {...registerForm.register("senha", { required: "Informe a senha" })} 
                   />
-                  {errors.senha && <p className="text-xs text-destructive">{errors.senha.message}</p>}
+                  {registerForm.formState.errors.senha && <p className="text-xs text-destructive">{registerForm.formState.errors.senha.message}</p>}
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="perfil">Perfil</Label>
                   <select 
                     id="perfil"
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    {...register("perfil", { required: "Selecione um perfil" })}
+                    {...registerForm.register("perfil", { required: "Selecione um perfil" })}
                   >
                     <option value="VOLUNTARIO">Voluntário</option>
                     <option value="GESTOR">Gestor</option>
                   </select>
-                  {errors.perfil && <p className="text-xs text-destructive">{errors.perfil.message}</p>}
+                  {registerForm.formState.errors.perfil && <p className="text-xs text-destructive">{registerForm.formState.errors.perfil.message}</p>}
                 </div>
                 <Button type="submit" className="w-full" disabled={loading}>
                   <UserPlus className="mr-2 h-4 w-4" />
