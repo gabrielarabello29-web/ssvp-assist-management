@@ -6,7 +6,11 @@ export const authService = {
     return data; // { token }
   },
   register: async ({ nome, email, senha, perfil }) => {
-    const { data } = await api.post("/auth/register", { nome, email, senha, perfil });
+    const { data } = await api.post("/auth/registrar", { 
+      email, 
+      senha, 
+      tipoUsuario: perfil 
+    });
     return data;
   },
 };
