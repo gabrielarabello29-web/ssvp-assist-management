@@ -1,1 +1,3 @@
-/* reaproveita classes globais de assistidos */
+.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 50; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+.modal-card { background: var(--card); border: 1px solid var(--border); border-radius: .75rem; padding: 1.5rem; width: 100%; max-width: 28rem; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+.modal-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; color: var(--foreground); }
