@@ -11,11 +11,25 @@ export const conselhosService = {
     return data;
   },
   criar: async (payload) => {
-    const { data } = await api.post("/conselhos/criar", { ...payload, ativo: true, status: "ATIVO" });
+    const body = {
+      ...payload,
+      // aliases p/ compatibilidade com nomes possíveis no backend
+      localidade: payload.cidade,
+      fundacao: payload.dataFundacao,
+      ativo: true,
+      status: "ATIVO",
+      situacao: "ATIVO",
+    };
+    const { data } = await api.post("/conselhos/criar", body);
+    // alguns backends ignoram status no POST — garante ATIVO via PUT
+    if (data?.id && data?.ativo === false) {
+      try { await api.put(`/conselhos/atualizar/${data.id}`, { ...body, id: data.id, ativo: true }); } catch {}
+    }
     return data;
   },
   atualizar: async (id, payload) => {
-    const { data } = await api.put(`/conselhos/atualizar/${id}`, { ...payload, ativo: true });
+    const body = { ...payload, localidade: payload.cidade, fundacao: payload.dataFundacao, ativo: true };
+    const { data } = await api.put(`/conselhos/atualizar/${id}`, body);
     return data;
   },
   deletar: async (id) => {
