@@ -39,8 +39,8 @@ export default function GestorConselhos() {
 
   const columns = [
     { key: "nome", header: "Nome" },
-    { key: "cidade", header: "Cidade", render: (r) => r.cidade || "—" },
-    { key: "dataFundacao", header: "Fundação", render: (r) => r.dataFundacao || "—" },
+    { key: "cidade", header: "Cidade", render: (r) => r.cidade || r.localidade || "—" },
+    { key: "dataFundacao", header: "Fundação", render: (r) => r.dataFundacao || r.fundacao || "—" },
     {
       key: "ativo", header: "Status",
       render: (r) => (
