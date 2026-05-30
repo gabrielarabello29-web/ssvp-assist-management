@@ -1,0 +1,11 @@
+.profile-card {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: .75rem;
+  padding: 1.5rem;
+  max-width: 36rem;
+}
+.profile-row { display: flex; justify-content: space-between; padding: .65rem 0; border-bottom: 1px solid hsl(var(--border)); font-size: .9rem; }
+.profile-row:last-child { border-bottom: 0; }
+.profile-row .label { color: hsl(var(--muted-foreground)); }
+.profile-row .value { font-weight: 500; color: hsl(var(--foreground)); }

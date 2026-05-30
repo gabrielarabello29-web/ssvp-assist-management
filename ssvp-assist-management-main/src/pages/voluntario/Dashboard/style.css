@@ -1,0 +1,4 @@
+.v-dash-title { font-size: 1.5rem; font-weight: 600; color: hsl(var(--foreground)); }
+.v-dash-sub { color: hsl(var(--muted-foreground)); font-size: .9rem; margin-bottom: 1.5rem; }
+.v-dash-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .v-dash-grid { grid-template-columns: repeat(2, 1fr); } }
