@@ -42,7 +42,7 @@ export default function GestorConferencias() {
         toast.success("Conferência criada");
       }
       setEditing(null);
-      load();
+      setTimeout(load, 500);
     } catch (e) { toast.error(extractErrorMessage(e)); }
   };
 
@@ -52,11 +52,31 @@ export default function GestorConferencias() {
     catch (e) { toast.error(extractErrorMessage(e)); }
   };
 
+  // Função para obter dados do conselho relacionado
+  const getConselhoData = (conferencia) => {
+    const conselho = conselhos.find(c => c.id === conferencia.conselhoId || c.id === conferencia.conselhoParticularId);
+    return conselho || {};
+  };
+
   const columns = [
     { key: "nome", header: "Nome" },
     { key: "conselho", header: "Conselho", render: (r) => r.conselho?.nome || r.conselhoParticular?.nome || r.conselhoNome || "—" },
-    { key: "cidade", header: "Cidade", render: (r) => r.conselho?.cidade || r.conselho?.localidade || r.conselhoParticular?.cidade || r.conselhoParticular?.localidade || "—" },
-    { key: "fundacao", header: "Fundação", render: (r) => r.conselho?.dataFundacao || r.conselho?.fundacao || r.conselhoParticular?.dataFundacao || r.conselhoParticular?.fundacao || "—" },
+    { 
+      key: "cidade", 
+      header: "Cidade", 
+      render: (r) => {
+        const conselho = getConselhoData(r);
+        return conselho.cidade || conselho.localidade || "—";
+      }
+    },
+    { 
+      key: "fundacao", 
+      header: "Fundação", 
+      render: (r) => {
+        const conselho = getConselhoData(r);
+        return conselho.dataFundacao || conselho.fundacao || "—";
+      }
+    },
     {
       key: "ativo", header: "Status",
       render: (r) => (
