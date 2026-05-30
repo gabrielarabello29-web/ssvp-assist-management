@@ -8,6 +8,6 @@ export default defineConfig({
   resolve: {
     alias: { "@": path.resolve(__dirname, "src") },
   },
-  server: { host: "::", port: 8080, strictPort: true },
-  preview: { host: "::", port: 8080, strictPort: true },
+  server: { host: "::", port: 3000, strictPort: true },
+  preview: { host: "::", port: 3000, strictPort: true },
 });

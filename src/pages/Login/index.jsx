@@ -212,7 +212,7 @@ export default function Login() {
             </>
           )}
           <p className="mt-6 text-center text-xs text-muted-foreground">
-            Backend esperado em <code className="rounded bg-muted px-1.5 py-0.5">http://localhost:8080</code>
+            Backend esperado em <code className="rounded bg-muted px-1.5 py-0.5">http://localhost:3000</code>
           </p>
         </div>
       </div>
