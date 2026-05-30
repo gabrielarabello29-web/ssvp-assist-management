@@ -11,11 +11,28 @@ export const conferenciasService = {
     return data;
   },
   criar: async (payload) => {
-    const { data } = await api.post("/conferencias/criar", { ...payload, ativo: true, status: "ATIVO" });
+    const body = {
+      ...payload,
+      conselhoId: payload.conselhoParticularId || payload.conselhoId,
+      conselhoParticularId: payload.conselhoParticularId || payload.conselhoId,
+      ativo: true,
+      status: "ATIVO",
+      situacao: "ATIVO",
+    };
+    const { data } = await api.post("/conferencias/criar", body);
+    if (data?.id && data?.ativo === false) {
+      try { await api.put(`/conferencias/atualizar/${data.id}`, { ...body, id: data.id, ativo: true }); } catch {}
+    }
     return data;
   },
   atualizar: async (id, payload) => {
-    const { data } = await api.put(`/conferencias/atualizar/${id}`, { ...payload, ativo: true });
+    const body = {
+      ...payload,
+      conselhoId: payload.conselhoParticularId || payload.conselhoId,
+      conselhoParticularId: payload.conselhoParticularId || payload.conselhoId,
+      ativo: true,
+    };
+    const { data } = await api.put(`/conferencias/atualizar/${id}`, body);
     return data;
   },
   deletar: async (id) => {

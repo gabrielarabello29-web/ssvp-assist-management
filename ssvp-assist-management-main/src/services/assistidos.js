@@ -11,7 +11,11 @@ export const assistidosService = {
     return data;
   },
   criar: async (payload) => {
-    const { data } = await api.post("/assistidos/criar", { ...payload, ativo: true, status: "ATIVO" });
+    const body = { ...payload, ativo: true, status: "ATIVO", situacao: "ATIVO" };
+    const { data } = await api.post("/assistidos/criar", body);
+    if (data?.id && data?.ativo === false) {
+      try { await api.put(`/assistidos/atualizar/${data.id}`, { ...body, id: data.id, ativo: true }); } catch {}
+    }
     return data;
   },
   atualizar: async (id, payload) => {
