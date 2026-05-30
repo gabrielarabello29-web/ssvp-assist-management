@@ -55,6 +55,8 @@ export default function GestorConferencias() {
   const columns = [
     { key: "nome", header: "Nome" },
     { key: "conselho", header: "Conselho", render: (r) => r.conselho?.nome || r.conselhoParticular?.nome || r.conselhoNome || "—" },
+    { key: "cidade", header: "Cidade", render: (r) => r.conselho?.cidade || r.conselho?.localidade || r.conselhoParticular?.cidade || r.conselhoParticular?.localidade || "—" },
+    { key: "fundacao", header: "Fundação", render: (r) => r.conselho?.dataFundacao || r.conselho?.fundacao || r.conselhoParticular?.dataFundacao || r.conselhoParticular?.fundacao || "—" },
     {
       key: "ativo", header: "Status",
       render: (r) => (
