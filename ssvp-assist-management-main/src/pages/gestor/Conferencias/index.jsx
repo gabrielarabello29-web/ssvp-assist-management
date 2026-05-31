@@ -78,10 +78,11 @@ export default function GestorConferencias() {
       }
     },
     {
-      key: "ativo", header: "Status",
+      key: "status",
+      header: "Status",
       render: (r) => (
-        <span className={`badge ${r.ativo ? "badge-success" : "badge-muted"}`}>
-          {r.ativo ? "Ativo" : "Inativo"}
+        <span className={`badge ${r.status ? "badge-success" : "badge-muted"}`}>
+          {r.status ? "Ativo" : "Inativo"}
         </span>
       ),
     },

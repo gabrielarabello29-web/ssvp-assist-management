@@ -10,6 +10,7 @@ import GestorAssistidos from "@/pages/gestor/Assistidos/index.jsx";
 import GestorAssistidoForm from "@/pages/gestor/AssistidoForm/index.jsx";
 import GestorConferencias from "@/pages/gestor/Conferencias/index.jsx";
 import GestorConselhos from "@/pages/gestor/Conselhos/index.jsx";
+import GestorUsuarios from "@/pages/gestor/Usuarios/index.jsx";
 
 import VoluntarioDashboard from "@/pages/voluntario/Dashboard/index.jsx";
 import VoluntarioAssistidos from "@/pages/voluntario/Assistidos/index.jsx";
@@ -43,6 +44,7 @@ export default function AppRoutes() {
         <Route path="assistidos/editar/:id" element={<GestorAssistidoForm mode="edit" />} />
         <Route path="conferencias" element={<GestorConferencias />} />
         <Route path="conselhos" element={<GestorConselhos />} />
+        <Route path="usuarios" element={<GestorUsuarios />} />
       </Route>
 
       <Route

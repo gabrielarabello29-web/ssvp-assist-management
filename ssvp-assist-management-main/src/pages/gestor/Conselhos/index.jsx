@@ -42,13 +42,14 @@ export default function GestorConselhos() {
     { key: "cidade", header: "Cidade", render: (r) => r.cidade || r.localidade || "—" },
     { key: "dataFundacao", header: "Fundação", render: (r) => r.dataFundacao || r.fundacao || "—" },
     {
-      key: "ativo", header: "Status",
-      render: (r) => (
-        <span className={`badge ${r.ativo ? "badge-success" : "badge-muted"}`}>
-          {r.ativo ? "Ativo" : "Inativo"}
-        </span>
-      ),
-    },
+        key: "status",
+        header: "Status",
+        render: (r) => (
+          <span className={`badge ${r.status ? "badge-success" : "badge-muted"}`}>
+            {r.status ? "Ativo" : "Inativo"}
+          </span>
+        ),
+      },
     {
       key: "actions", header: "",
       render: (r) => (
